@@ -1,6 +1,15 @@
-composer.phar
-vendor/
-
-# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+# Created by .gitignore support plugin (hsz.mobi)
+/vendor/
+/tmp/
+index.php
+composer.lock
+bower_components
+js/node_modules
+js/main-built.js
+js/compile.log
+images/Thumbs.db
+.idea
+src/Zone/PM/Config/db.yaml
+zonegroupe-bundle.zip
+deploy/gestion-minute.zip
+gestion-minute.iml

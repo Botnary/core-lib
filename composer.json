@@ -1,0 +1,40 @@
+{
+  "type":"package",
+  "name": "zone/lib-core",
+  "description": "Zone core libs",
+  "version": "dev-master",
+  "authors": [
+    {
+      "name": "Constantin",
+      "email": "my.test@live.ca"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.org"
+    }
+  ],
+  "require": {
+    "doctrine/orm": "*",
+    "slim/slim": "2.*",
+    "symfony/yaml": "*",
+    "symfony/intl": "2.6.*@dev",
+    "smarty/smarty": "3.1.19",
+    "anouar/fpdf": "dev-master",
+    "guzzle/http": "3.7.*@dev",
+    "hieu-le/wordpress-xmlrpc-client": "dev-master",
+    "monolog/monolog": "*",
+    "symfony/event-dispatcher": "2.7.*@dev",
+    "respect/validation": "0.8.*@dev",
+    "intervention/image": "dev-master",
+    "phpunit/phpunit": "4.4.*",
+    "symfony/finder": "3.0.*@dev",
+    "swiftmailer/swiftmailer": "5.3.*@dev"
+  },
+  "autoload": {
+    "psr-0": {
+      "Zone\\Core": "src/"
+    }
+  }
+}
