@@ -1,7 +1,7 @@
 {
   "type":"package",
   "name": "zone/lib-core",
-  "description": "Zone core lib",
+  "description": "Core lib",
   "version": "dev-master",
   "authors": [
     {
