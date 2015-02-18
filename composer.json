@@ -6,15 +6,9 @@
   "authors": [
     {
       "name": "Constantin",
-      "email": "my.test@live.ca"
+      "email": "botnary@gmail.com"
     }
-  ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packagist.org"
-    }
-  ],
+  ],  
   "require": {
     "doctrine/orm": "*",
     "slim/slim": "2.*",
