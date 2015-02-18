@@ -1,1 +1,1 @@
-# zone-core
+# core-lib
