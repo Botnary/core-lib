@@ -10,6 +10,7 @@ namespace Zone\Core\Controller;
 
 
 use Monolog\Handler\ErrorLogHandler;
+use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Zone\Core\Component\DependencyInjection\ContainerAware;
@@ -27,6 +28,7 @@ class Controller extends ContainerAware
         $this->setContainer($container);
         $this->_logger = new Logger('Gestion Minute');
         $this->_logger->pushHandler(new ErrorLogHandler());
+        $this->_logger->pushHandler(new StreamHandler('/home/'.get_current_user().'/public_html/app.log', Logger::WARNING));
         $this->container->set('_logger', $this->_logger);
     }
 
