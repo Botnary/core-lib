@@ -14,6 +14,7 @@ use Zone\Core\Component\SMS\Services\ISmsService;
 use Zone\Core\Component\SMS\Services\NexmoService;
 use Zone\Core\Component\SMS\Services\SmsMessage;
 use Zone\Core\Component\SMS\Services\WapMessage;
+use Zone\Core\Util\NetworkCredential;
 
 class SmsService implements ISmsService
 {
@@ -21,7 +22,7 @@ class SmsService implements ISmsService
 
     private $service;
 
-    function __construct($service)
+    function __construct($service, NetworkCredential $credential)
     {
         $validServices = array(self::Nexmo);
         if (!in_array($service, $validServices)) {
@@ -29,7 +30,7 @@ class SmsService implements ISmsService
         }
         switch ($service) {
             case self::Nexmo:
-                $this->service = new NexmoService();
+                $this->service = new NexmoService($credential);
                 break;
         }
     }

@@ -11,18 +11,21 @@ namespace Zone\Core\Component\SMS\Services;
 
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Logger;
+use Zone\Core\Util\NetworkCredential;
 
 class NexmoService implements ISmsService
 {
-    const NX_USERNAME = '550e5d2c'; // Enter your username here
-    const NX_PASSWORD = '878b577f'; // Enter your password here
-    const NX_SERVER = 'http://rest.nexmo.com/sms/json';
-
+    private $user;
+    private $pass;
+    private $server;
     private $_logger;
 
-    function __construct()
+    function __construct(NetworkCredential $credential)
     {
-        $this->_logger = new Logger('Gestion Application');
+        $this->user = $credential->getUser();
+        $this->pass = $credential->getPassword();
+        $this->server = $credential->getUri();
+        $this->_logger = new Logger('Nexmo SMS');
         $this->_logger->pushHandler(new ErrorLogHandler());
     }
 
@@ -39,7 +42,7 @@ class NexmoService implements ISmsService
      */
     private function sendRequest($post)
     {
-        $to_nexmo = curl_init(self::NX_SERVER);
+        $to_nexmo = curl_init($this->server);
         curl_setopt($to_nexmo, CURLOPT_POST, true);
         curl_setopt($to_nexmo, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($to_nexmo, CURLOPT_POSTFIELDS, $post);
@@ -56,7 +59,7 @@ class NexmoService implements ISmsService
         $text = utf8_encode($message->message); //Must be UTF-8 Encoded
         $from = urlencode($from); // URL Encode
         $text = urlencode($text); // URL Encode
-        $post = 'username=' . self::NX_USERNAME . '&password=' . self::NX_PASSWORD . '&from=' . $from . '&to=' . $message->toPhone . '&text=' . $text;
+        $post = 'username=' . $this->user . '&password=' . $this->pass . '&from=' . $from . '&to=' . $message->toPhone . '&text=' . $text;
         $request = json_decode($this->sendRequest($post));
         $this->getLogger()->addDebug('SMS: send status', array($request));
         $sent = true;
@@ -76,7 +79,7 @@ class NexmoService implements ISmsService
         //Binary messages must be hex encoded
         $body = bin2hex($message->message); //Must be hex encoded binary
         $udh = bin2hex($message->udh); //Must be hex encoded binary
-        $post = 'username=' . self::NX_USERNAME . '&password=' . self::NX_PASSWORD . '&from=' . $message->fromPhone . '&to=' . $message->toPhone . '&type=binary&body=' . $body . '&udh=' . $udh;
+        $post = 'username=' . $this->user . '&password=' . $this->pass . '&from=' . $message->fromPhone . '&to=' . $message->toPhone . '&type=binary&body=' . $body . '&udh=' . $udh;
         $request = json_decode($this->sendRequest($post));
         $sent = true;
         foreach ($request->messages as $message) {
@@ -95,7 +98,7 @@ class NexmoService implements ISmsService
         //WAP Push title and URL must be UTF-8 Encoded
         $title = utf8_encode($message->message); //Must be UTF-8 Encoded
         $url = utf8_encode($message->url); //Must be UTF-8 Encoded
-        $post = 'username=' . self::NX_USERNAME . '&password=' . self::NX_PASSWORD . '&from=' . $message->fromPhone . '&to=' . $message->toPhone . '&type=wappush&url=' . $url . '&title=' . $title . '&validity=' . $message->validity;
+        $post = 'username=' . $this->user . '&password=' . $this->pass . '&from=' . $message->fromPhone . '&to=' . $message->toPhone . '&type=wappush&url=' . $url . '&title=' . $title . '&validity=' . $message->validity;
         $request = json_decode($this->sendRequest($post));
         $sent = true;
         foreach ($request->messages as $message) {
