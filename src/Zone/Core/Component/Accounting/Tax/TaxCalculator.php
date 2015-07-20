@@ -16,7 +16,8 @@ class TaxCalculator implements ITaxStrategy
 
     public function calcTax($amount)
     {
-        return round($amount * $this->rate / 100, 2);
+        $t = ($amount * $this->rate) / 100;
+        return round($t * 100) / 100;
     }
 
     function __construct($rate)
