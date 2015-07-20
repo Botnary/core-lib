@@ -37,7 +37,8 @@ class QuebecTaxCalculator
 
     function getTotalWithTax()
     {
-        return round($this->amount + $this->getTps() + $this->getTvq(), 2);
+        $total = $this->amount + $this->getTps() + $this->getTvq();
+        return round($total * 100) / 100;
     }
 
 } 
