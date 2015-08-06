@@ -9,12 +9,14 @@
 namespace Zone\Core\Component\Accounting\Tax;
 
 
+use Che\Math\Decimal\Decimal;
+
 class TaxContext
 {
     private $taxStrategy;
     private $amount;
 
-    function __construct($amount)
+    function __construct(Decimal $amount)
     {
         $this->amount = $amount;
     }

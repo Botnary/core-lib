@@ -8,6 +8,8 @@
 
 namespace Zone\Core\Component\Accounting;
 
+use Che\Math\Decimal\Decimal;
+
 class QuebecTaxCalculator
 {
     private $amount;
@@ -17,9 +19,9 @@ class QuebecTaxCalculator
 
     function __construct($data = array())
     {
-        $this->amount = $data['amount'];
-        $this->tps = $data['tps'];
-        $this->tvq = $data['tvq'];
+        $this->amount = new Decimal($data['amount']);
+        $this->tps = new Decimal($data['tps']);
+        $this->tvq = new Decimal($data['tvq']);
         $this->context = new Tax\TaxContext($this->amount);
     }
 

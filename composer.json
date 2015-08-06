@@ -24,7 +24,8 @@
     "intervention/image": "dev-master",
     "phpunit/phpunit": "4.4.*",
     "symfony/finder": "3.0.*@dev",
-    "swiftmailer/swiftmailer": "5.3.*@dev"
+    "swiftmailer/swiftmailer": "5.3.*@dev",
+    "che/doctrine-decimal":"*"
   },
   "autoload": {
     "psr-0": {

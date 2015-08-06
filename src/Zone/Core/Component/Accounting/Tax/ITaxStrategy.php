@@ -9,9 +9,11 @@
 namespace Zone\Core\Component\Accounting\Tax;
 
 
+use Che\Math\Decimal\Decimal;
+
 interface ITaxStrategy
 {
-    function __construct($rate);
+    function __construct(Decimal $rate);
 
-    public function calcTax($amount);
+    public function calcTax(Decimal $amount);
 }

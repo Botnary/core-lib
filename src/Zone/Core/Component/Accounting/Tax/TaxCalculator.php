@@ -9,18 +9,19 @@
 namespace Zone\Core\Component\Accounting\Tax;
 
 
+use Che\Math\Decimal\Decimal;
+
 class TaxCalculator implements ITaxStrategy
 {
 
     private $rate;
 
-    public function calcTax($amount)
+    public function calcTax(Decimal $amount)
     {
-        $t = ($amount * $this->rate) / 100;
-        return round($t * 100) / 100;
+        return $amount->mul($this->rate)->div(new Decimal("100", 16));
     }
 
-    function __construct($rate)
+    function __construct(Decimal $rate)
     {
         $this->rate = $rate;
     }
