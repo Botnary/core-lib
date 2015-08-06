@@ -25,12 +25,18 @@ class QuebecTaxCalculator
         $this->context = new Tax\TaxContext($this->amount);
     }
 
+    /**
+     * @return Decimal
+     */
     function getTps()
     {
         $this->context->setTaxStrategy(new Tax\TaxCalculator($this->tps));
         return $this->context->calculateTax();
     }
 
+    /**
+     * @return Decimal
+     */
     function getTvq()
     {
         $this->context->setTaxStrategy(new Tax\TaxCalculator($this->tvq));
@@ -39,8 +45,9 @@ class QuebecTaxCalculator
 
     function getTotalWithTax()
     {
-        $total = $this->amount + $this->getTps() + $this->getTvq();
-        return round($total * 100) / 100;
+        $total = $this->amount->add($this->getTps()->round(2, Decimal::ROUND_HALF_EVEN))
+            ->add($this->getTvq()->round(2, Decimal::ROUND_HALF_EVEN));
+        return $total;
     }
 
 } 
