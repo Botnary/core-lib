@@ -38,7 +38,7 @@ class Printer extends BasePrinter
         $this->aligns = $a;
     }
 
-    function addTableRow($data, $fill = false, $border = true)
+    function addTableRow($data, $fill = false, $border = true, $style = null)
     {
         //Calculate the height of the row
         $h = $this->getTotalHeight($data);
@@ -54,6 +54,10 @@ class Printer extends BasePrinter
             if ($border) {
                 //Draw the border
                 $this->Rect($x, $y, $w, $h, $fill?'DF':'D');
+            }
+            //Set the style
+            if($style){
+                $this->SetFont('',$style);
             }
             //Print the text
             $this->MultiCell($w, 5, $this->toUtf($data[$i]), 0, $a);
