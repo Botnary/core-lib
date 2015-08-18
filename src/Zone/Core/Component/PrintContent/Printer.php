@@ -61,6 +61,8 @@ class Printer extends BasePrinter
             }
             //Print the text
             $this->MultiCell($w, 5, $this->toUtf($data[$i]), 0, $a);
+            //Reset back the style
+            $this->SetFont('','');
             //Put the position to the right of the cell
             $this->SetXY($x + $w, $y);
         }
