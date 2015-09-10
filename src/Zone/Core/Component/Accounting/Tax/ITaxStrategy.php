@@ -15,5 +15,9 @@ interface ITaxStrategy
 {
     function __construct(Decimal $rate);
 
+    /**
+     * @param Decimal $amount
+     * @return Decimal
+     */
     public function calcTax(Decimal $amount);
 }

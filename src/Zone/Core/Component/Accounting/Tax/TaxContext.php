@@ -29,6 +29,9 @@ class TaxContext
         $this->taxStrategy = $taxStrategy;
     }
 
+    /**
+     * @return Decimal
+     */
     public function calculateTax()
     {
         return $this->taxStrategy->calcTax($this->amount);

@@ -16,6 +16,10 @@ class TaxCalculator implements ITaxStrategy
 
     private $rate;
 
+    /**
+     * @param Decimal $amount
+     * @return Decimal
+     */
     public function calcTax(Decimal $amount)
     {
         return $amount->mul($this->rate)->div(new Decimal("100", 16));
