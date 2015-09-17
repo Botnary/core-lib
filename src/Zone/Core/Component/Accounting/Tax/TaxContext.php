@@ -23,10 +23,12 @@ class TaxContext
 
     /**
      * @param ITaxStrategy $taxStrategy
+     * @return TaxContext
      */
     public function setTaxStrategy($taxStrategy)
     {
         $this->taxStrategy = $taxStrategy;
+        return $this;
     }
 
     /**
