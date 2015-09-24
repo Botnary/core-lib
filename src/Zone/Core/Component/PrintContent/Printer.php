@@ -81,9 +81,12 @@ class Printer extends BasePrinter
 
     function checkPageBreak($h)
     {
+        $x = $this->GetX();
         //If the height h would cause an overflow, add a new page immediately
-        if ($this->GetY() + $h > $this->PageBreakTrigger)
+        if ($this->GetY() + $h > $this->PageBreakTrigger) {
             $this->AddPage($this->CurOrientation);
+            $this->SetX($x);
+        }
     }
 
     function nbLines($w, $txt)
