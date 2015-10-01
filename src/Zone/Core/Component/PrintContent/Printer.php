@@ -16,6 +16,11 @@ class Printer extends BasePrinter
     private $widths;
     private $aligns;
 
+    function __construct($orientation = 'P', $unit = 'mm', $size = 'A4')
+    {
+        parent::__construct($orientation = 'P', $unit = 'mm', $size = 'A4');
+    }
+
     function setTableWidths($w)
     {
         //Set the array of column widths
