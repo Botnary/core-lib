@@ -9,11 +9,9 @@
 namespace Zone\Core\Component\PrintContent;
 
 
-use Anouar\Fpdf\Fpdf;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Zone\PM\Events\PrinterEvents;
 
-abstract class BasePrinter extends Fpdf
+abstract class BasePrinter extends UnicodeFPDF
 {
     private $javascript = "";
     private $n_js;
@@ -69,12 +67,14 @@ abstract class BasePrinter extends Fpdf
         return $this->fileName;
     }
 
-    function Output()
+    function Output($file = null)
     {
         if ($this->return) return parent::Output('', 'S');
         if ($this->isAutoPrint()) {
             parent::Output();
-        } else {
+        } else if(trim($file)){
+            parent::Output($file, 'F');
+        }else{
             parent::Output($this->getFileName(), 'D');
         }
         return false;
@@ -218,7 +218,8 @@ abstract class BasePrinter extends Fpdf
 
     function toUtf($txt)
     {
-        return iconv('UTF-8', 'windows-1252', stripslashes(trim($this->escape($txt))));
+        return $txt;
+        //return iconv('UTF-8', 'windows-1252', stripslashes(trim($this->escape($txt))));
     }
 
     var $extgstates = array();
