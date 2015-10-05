@@ -29,7 +29,7 @@ class DataTable
     function compile()
     {
         $border = $this->bordered ? 'border=1' : '';
-        $html = sprintf('<table %s cellpadding="0" cellspacing="2">', $border);
+        $html = sprintf('<table %s cellpadding="2" cellspacing="0">', $border);
         foreach ($this->table as $row) {
             $html .= '<tr>';
             /** @var DataTableCell $cell */
