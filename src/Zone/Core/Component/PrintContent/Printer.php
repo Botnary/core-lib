@@ -155,7 +155,7 @@ class Printer extends \mPDF
         $this->WriteHTML($dataTable->compile());
     }
 
-    function addCaption($text, $fontSize = 16, $style = 'B', $align = 'C')
+    function addCaption($text, $headline = '3', $align = 'C')
     {
         switch ($align) {
             case 'C':
@@ -171,9 +171,7 @@ class Printer extends \mPDF
                 $a = 'center';
                 break;
         }
-        $this->SetFont('dejavusans', $style, $fontSize);
-        $this->WriteHTML(sprintf('<h1 style="text-align: %s">%s</h1>', $a, $text));
-        $this->SetFont('dejavusans', '', 9);
+        $this->WriteHTML(sprintf('<h%s style="text-align: %s;">%s</h%s>', $headline, $a, $text, $headline));
     }
 
     function getFormatter()
