@@ -18,6 +18,7 @@ class DataTableCell
     private $text;
     private $align;
     private $useBorders;
+    private $isTh;
 
     /**
      * DataTableCell constructor.
@@ -45,8 +46,12 @@ class DataTableCell
     {
         $width = $this->width ? 'width="' . $this->width . '"' : '';
         $height = $this->height ? 'width="' . $this->height . '"' : '';
-        $style = $this->getUseBorders() ? 'style="border: solid 1px; #999999"' : '';
-        return sprintf('<td %s %s valign="%s" align="%s" %s>%s</td>', $width, $height, $this->position, $this->align, $style, $this->text);
+        $style = '';
+        if($this->getIsTh()) {
+            return sprintf('<th %s %s valign="%s" align="%s" %s>%s</th>', $width, $height, $this->position, $this->align, $style, $this->text);
+        }else{
+            return sprintf('<td %s %s valign="%s" align="%s" %s>%s</td>', $width, $height, $this->position, $this->align, $style, $this->text);
+        }
     }
 
     /**
@@ -157,4 +162,19 @@ class DataTableCell
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIsTh()
+    {
+        return $this->isTh;
+    }
+
+    /**
+     * @param mixed $isTh
+     */
+    public function setIsTh($isTh)
+    {
+        $this->isTh = $isTh;
+    }
 }

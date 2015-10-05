@@ -37,7 +37,7 @@ class DataTable
 
     function compile()
     {
-        $border = $this->bordered ? 'style="1px solid #999999"' : '';
+        $border = $this->bordered ? 'border="1" style="1px solid #ddd"' : '';
         $html = sprintf('<table %s cellpadding="2" cellspacing="0">', $border);
         if (count($this->head) > 0) {
             $html .= '<thead>';
@@ -47,6 +47,7 @@ class DataTable
                 foreach ($row as $cell) {
                     if ($this->bordered) {
                         $cell->setUseBorders(true);
+                        $cell->setIsTh(true);
                     }
                     $html .= $cell->compile();
                 }

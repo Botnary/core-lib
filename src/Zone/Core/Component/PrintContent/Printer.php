@@ -85,11 +85,13 @@ class Printer extends \mPDF
         return $this->h - ($this->tMargin + $this->bMargin);
     }
 
-    function Output()
+    function Output($file = null, $dest = '')
     {
         if ($this->return) return parent::Output('', 'S');
         if ($this->isAutoPrint()) {
             parent::Output();
+        } else if (trim($file)) {
+            parent::Output($file, 'F');
         } else {
             parent::Output($this->getFileName(), 'D');
         }
@@ -136,9 +138,9 @@ class Printer extends \mPDF
         return $this->eventDispatcher;
     }
 
-    function AddPage($orientation = '', $size = '')
+    function AddPage($orientation = '', $condition = '', $resetpagenum = '', $pagenumstyle = '', $suppress = '', $mgl = '', $mgr = '', $mgt = '', $mgb = '', $mgh = '', $mgf = '', $ohname = '', $ehname = '', $ofname = '', $efname = '', $ohvalue = 0, $ehvalue = 0, $ofvalue = 0, $efvalue = 0, $pagesel = '', $newformat = '')
     {
-        parent::AddPage($orientation, $size);
+        parent::AddPage($orientation, $condition, $resetpagenum, $pagenumstyle, $suppress, $mgl, $mgr, $mgt, $mgb, $mgh, $mgf, $ohname, $ehname, $ofname, $efname, $ohvalue, $ehvalue, $ofvalue, $efvalue, $pagesel, $newformat);
         $this->getEventDispatcher()->dispatch(PrinterEvents::ADD_PAGE, new PrinterEvents($this));
     }
 
