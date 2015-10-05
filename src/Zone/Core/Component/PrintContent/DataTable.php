@@ -45,6 +45,9 @@ class DataTable
                 $html .= sprintf('<tr style="background: %s">', $this->headBgColor);
                 /** @var DataTableCell $cell */
                 foreach ($row as $cell) {
+                    if ($this->bordered) {
+                        $cell->setUseBorders(true);
+                    }
                     $html .= $cell->compile();
                 }
                 $html .= '</tr>';
@@ -55,6 +58,9 @@ class DataTable
             $html .= '<tr>';
             /** @var DataTableCell $cell */
             foreach ($row as $cell) {
+                if ($this->bordered) {
+                    $cell->setUseBorders(true);
+                }
                 $html .= $cell->compile();
             }
             $html .= '</tr>';
