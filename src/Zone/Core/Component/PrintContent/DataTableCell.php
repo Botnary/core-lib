@@ -20,6 +20,17 @@ class DataTableCell
     private $useBorders;
 
     /**
+     * DataTableCell constructor.
+     */
+    public function __construct()
+    {
+        $this->setUseBorders(false);
+        $this->setAlign('left');
+        $this->setPosition('top');
+    }
+
+
+    /**
      * @return DataTableCell
      */
     public static function create()
