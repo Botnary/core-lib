@@ -153,7 +153,6 @@ class Printer extends \mPDF
 
     function addTable(DataTable $dataTable)
     {
-        error_log($dataTable->compile());
         $this->WriteHTML($dataTable->compile());
     }
 
