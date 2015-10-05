@@ -38,7 +38,7 @@ class DataTable
             }
             $html .= '</tr>';
         }
-        $html = '</table>';
+        $html .= '</table>';
         return $html;
     }
 
