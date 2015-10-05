@@ -1,5 +1,5 @@
 {
-  "type":"package",
+  "type": "package",
   "name": "zone/lib-core",
   "description": "Core lib",
   "version": "dev-master",
@@ -8,14 +8,13 @@
       "name": "Constantin",
       "email": "botnary@gmail.com"
     }
-  ],  
+  ],
   "require": {
     "doctrine/orm": "*",
     "slim/slim": "2.*",
     "symfony/yaml": "*",
     "symfony/intl": "2.6.*@dev",
     "smarty/smarty": "3.1.19",
-    "anouar/fpdf": "dev-master",
     "guzzle/guzzle": "*",
     "hieu-le/wordpress-xmlrpc-client": "dev-master",
     "monolog/monolog": "*",
@@ -25,7 +24,8 @@
     "phpunit/phpunit": "4.4.*",
     "symfony/finder": "3.0.*@dev",
     "swiftmailer/swiftmailer": "5.3.*@dev",
-    "che/doctrine-decimal":"*"
+    "che/doctrine-decimal": "*",
+    "mpdf/mpdf": "*"
   },
   "autoload": {
     "psr-0": {
