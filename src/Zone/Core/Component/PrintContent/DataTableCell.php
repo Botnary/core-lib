@@ -172,9 +172,11 @@ class DataTableCell
 
     /**
      * @param mixed $isTh
+     * @return DataTableCell
      */
     public function setIsTh($isTh)
     {
         $this->isTh = $isTh;
+        return $this;
     }
 }
