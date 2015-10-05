@@ -15,6 +15,12 @@ use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 class Printer extends \mPDF
 {
     private $javascript = true;
+    private $n_js;
+    private $useAutoPrint = false;
+    private $fileName = 'Document.pdf';
+    private $docTitle = '';
+    private $return = false;
+    private $eventDispatcher;
 
     /**
      * Printer constructor.
@@ -34,6 +40,7 @@ class Printer extends \mPDF
     {
         parent::mPDF($mode, $format, $default_font_size, $default_font, $mgl, $mgr, $mgt, $mgb, $mgh, $mgf, $orientation);
         $this->SetFont('dejavusans', 'B', 9);
+        $this->eventDispatcher = new EventDispatcher();
     }
 
     function _putjavascript()
@@ -67,5 +74,98 @@ class Printer extends \mPDF
         if (!empty($this->javascript)) {
             $this->_out('/Names <</JavaScript ' . ($this->n_js) . ' 0 R>>');
         }
+    }
+
+    function getAvailableWidth()
+    {
+        return $this->w - ($this->lMargin + $this->rMargin);
+    }
+
+    function getAvailableHeight()
+    {
+        return $this->h - ($this->tMargin + $this->bMargin);
+    }
+
+    function Output()
+    {
+        if ($this->return) return parent::Output('', 'S');
+        if ($this->isAutoPrint()) {
+            parent::Output();
+        } else {
+            parent::Output($this->getFileName(), 'D');
+        }
+        return false;
+    }
+
+    function setDocumentTitle($title)
+    {
+        $this->docTitle = $title;
+        $this->fileName = $this->slug(str_replace(' ', '_', $this->docTitle)) . '.pdf';
+    }
+
+    function getDocumentTitle()
+    {
+        return $this->docTitle;
+    }
+
+    function useAutoPrint()
+    {
+        $this->javascript = "print('true');";
+        $this->useAutoPrint = true;
+    }
+
+    function useReturn()
+    {
+        $this->return = true;
+    }
+
+    function isAutoPrint()
+    {
+        return $this->useAutoPrint;
+    }
+
+    function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @return EventDispatcher
+     */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
+    }
+
+    function AddPage($orientation = '', $size = '')
+    {
+        parent::AddPage($orientation, $size);
+        $this->getEventDispatcher()->dispatch(PrinterEvents::ADD_PAGE, new PrinterEvents($this));
+    }
+
+    static function slug($input)
+    {
+        $string = html_entity_decode($input, ENT_COMPAT, "UTF-8");
+        $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
+        return strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $string));
+    }
+
+    function addTableRow($data = array())
+    {
+        $html = '<table border="0" cellpadding="0" cellspacing="0">';
+        foreach ($data as $row) {
+            $html .= '<tr>';
+            foreach ($row as $cell) {
+                $html .= sprintf('<td valign="top">%s &nbsp;</td>', $cell);
+            }
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+        $this->WriteHTML($html);
+    }
+
+    function addTable(DataTable $dataTable)
+    {
+        $this->WriteHTML($dataTable->compile());
     }
 }
