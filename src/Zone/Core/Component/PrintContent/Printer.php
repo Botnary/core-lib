@@ -39,7 +39,6 @@ class Printer extends \mPDF
     public function __construct($mode = '', $format = 'A4', $default_font_size = 0, $default_font = '', $mgl = 15, $mgr = 15, $mgt = 16, $mgb = 16, $mgh = 9, $mgf = 9, $orientation = 'P')
     {
         parent::mPDF($mode, $format, $default_font_size, $default_font, $mgl, $mgr, $mgt, $mgb, $mgh, $mgf, $orientation);
-        $this->SetFont('dejavusans', 'B', 9);
         $this->eventDispatcher = new EventDispatcher();
     }
 
@@ -150,22 +149,35 @@ class Printer extends \mPDF
         return strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $string));
     }
 
-    function addTableRow($data = array())
-    {
-        $html = '<table border="0" cellpadding="0" cellspacing="0">';
-        foreach ($data as $row) {
-            $html .= '<tr>';
-            foreach ($row as $cell) {
-                $html .= sprintf('<td valign="top">%s &nbsp;</td>', $cell);
-            }
-            $html .= '</tr>';
-        }
-        $html .= '</table>';
-        $this->WriteHTML($html);
-    }
-
     function addTable(DataTable $dataTable)
     {
+        error_log($dataTable->compile());
         $this->WriteHTML($dataTable->compile());
+    }
+
+    function addCaption($text, $fontSize = 16, $style = 'B', $align = 'C')
+    {
+        switch ($align) {
+            case 'C':
+                $a = 'center';
+                break;
+            case 'L':
+                $a = 'left';
+                break;
+            case 'R':
+                $a = 'right';
+                break;
+            default:
+                $a = 'center';
+                break;
+        }
+        $this->SetFont('dejavusans', $style, $fontSize);
+        $this->WriteHTML(sprintf('<h1 style="text-align: %s">%s</h1>', $a, $text));
+        $this->SetFont('dejavusans', '', 9);
+    }
+
+    function getFormatter()
+    {
+        return new NumberFormatter("en", NumberFormatter::CURRENCY);
     }
 }
