@@ -31,11 +31,13 @@ class DataTableCell
 
 
     /**
+     * @param $text
      * @return DataTableCell
      */
-    public static function create()
+    public static function create($text)
     {
         $instance = new self();
+        $instance->setText($text);
         return $instance;
     }
 
@@ -57,10 +59,12 @@ class DataTableCell
 
     /**
      * @param null $width
+     * @return DataTableCell
      */
     public function setWidth($width)
     {
         $this->width = $width;
+        return $this;
     }
 
     /**
@@ -73,10 +77,12 @@ class DataTableCell
 
     /**
      * @param null $height
+     * @return DataTableCell
      */
     public function setHeight($height)
     {
         $this->height = $height;
+        return $this;
     }
 
     /**
@@ -89,10 +95,12 @@ class DataTableCell
 
     /**
      * @param string $position
+     * @return DataTableCell
      */
     public function setPosition($position)
     {
         $this->position = $position;
+        return $this;
     }
 
     /**
@@ -105,10 +113,12 @@ class DataTableCell
 
     /**
      * @param mixed $text
+     * @return DataTableCell
      */
     public function setText($text)
     {
         $this->text = $text;
+        return $this;
     }
 
     /**
@@ -121,10 +131,12 @@ class DataTableCell
 
     /**
      * @param mixed $align
+     * @return DataTableCell
      */
     public function setAlign($align)
     {
         $this->align = $align;
+        return $this;
     }
 
     /**
@@ -137,10 +149,12 @@ class DataTableCell
 
     /**
      * @param mixed $useBorders
+     * @return DataTableCell
      */
     public function setUseBorders($useBorders)
     {
         $this->useBorders = $useBorders;
+        return $this;
     }
 
 }
