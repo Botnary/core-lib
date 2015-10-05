@@ -17,30 +17,95 @@ class DataTableCell
     private $position;
     private $text;
     private $align;
+    private $useBorders;
 
     /**
-     * DataTableCell constructor.
-     * @param $text
-     * @param $width
-     * @param $height
-     * @param string $align
-     * @param string $position
+     * @return DataTableCell
      */
-    public function __construct($text, $width = null, $height = null, $align = 'left', $position = 'top')
+    public static function create()
     {
-        $this->width = $width;
-        $this->height = $height;
-        $this->position = $position;
-        $this->text = $text;
-        $this->setAlign($align);
-        return $this;
+        $instance = new self();
+        return $instance;
     }
 
     function compile()
     {
         $width = $this->width ? 'width="' . $this->width . '"' : '';
         $height = $this->height ? 'width="' . $this->height . '"' : '';
-        return sprintf('<td %s %s valign="%s" align="%s">%s</td>', $width, $height, $this->position, $this->align, $this->text);
+        $style = $this->getUseBorders() ? 'style="border: solid 1px;"' : '';
+        return sprintf('<td %s %s valign="%s" align="%s" %s>%s</td>', $width, $height, $this->position, $this->align, $style, $this->text);
+    }
+
+    /**
+     * @return null
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * @param null $width
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    }
+
+    /**
+     * @return null
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param null $height
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param string $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param mixed $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlign()
+    {
+        return $this->align;
     }
 
     /**
@@ -50,4 +115,21 @@ class DataTableCell
     {
         $this->align = $align;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUseBorders()
+    {
+        return $this->useBorders;
+    }
+
+    /**
+     * @param mixed $useBorders
+     */
+    public function setUseBorders($useBorders)
+    {
+        $this->useBorders = $useBorders;
+    }
+
 }
