@@ -45,14 +45,17 @@ class DataTableCell
 
     function compile()
     {
-        $width = $this->width ? 'width="' . $this->width . '"' : '';
+        $style = 'style="';
         $height = $this->height ? 'width="' . $this->height . '"' : '';
-        $style = $this->getUseBorders() ? 'style="border: 0.1mm solid #000000;"' : '';
+        $style .= $this->getUseBorders() ? 'border: 0.1mm solid #000000;' : '';
+        $style .= $this->width ? 'width:' . $this->width . ';' : '';
+        $style .= $this->height ? 'height:' . $this->height . ';' : '';
         $colSpan = $this->colSpan > 0 ? sprintf('colspan="%d"', $this->colSpan) : '';
+        $style .= '"';
         if ($this->getIsTh()) {
-            return sprintf('<th %s %s %s valign="%s" align="%s" %s>%s</th>', $colSpan, $width, $height, $this->position, $this->align, $style, $this->text);
+            return sprintf('<th %s %s valign="%s" align="%s" %s>%s</th>', $colSpan, $height, $this->position, $this->align, $style, $this->text);
         } else {
-            return sprintf('<td %s %s %s valign="%s" align="%s" %s>%s</td>', $colSpan, $width, $height, $this->position, $this->align, $style, $this->text);
+            return sprintf('<td %s %s valign="%s" align="%s" %s>%s</td>', $colSpan, $height, $this->position, $this->align, $style, $this->text);
         }
     }
 
