@@ -40,9 +40,10 @@ class DataTable
         $html = '';
         $border = $this->bordered ? 'style="border-collapse: collapse;"' : '';
         if($this->bordered) {
-            $html = '<style>td {border-left: 0.1mm solid #000000; border-right: 0.1mm solid #000000;}
-                        thead td { background-color: #EEEEEE; text-align: center; border: 0.1mm solid #000000; }
-                </style>';
+            $html = '<style>
+                        td {border: 0.1mm solid #000000; }
+                        th {border: 0.1mm solid #000000; }
+                    </style>';
         }
         $html .= sprintf('<table %s cellpadding="8" cellspacing="0">', $border);
         if (count($this->head) > 0) {
@@ -61,6 +62,7 @@ class DataTable
             }
             $html .= '</thead>';
         }
+        $html .= '<tbody>';
         foreach ($this->table as $row) {
             $html .= '<tr>';
             /** @var DataTableCell $cell */
@@ -72,6 +74,7 @@ class DataTable
             }
             $html .= '</tr>';
         }
+        $html .= '</tbody>';
         $html .= '</table>';
         return $html;
     }
