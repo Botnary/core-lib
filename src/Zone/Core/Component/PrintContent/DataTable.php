@@ -16,6 +16,7 @@ class DataTable
     private $head;
     private $bordered;
     private $headBgColor;
+    private $fontSize;
 
     public function __construct($bordered = false, $headBgColor = 'rgb(206, 206, 206)')
     {
@@ -23,6 +24,7 @@ class DataTable
         $this->head = array();
         $this->bordered = $bordered;
         $this->headBgColor = $headBgColor;
+        $this->fontSize = 9;
     }
 
     function addHead($row)
@@ -38,7 +40,7 @@ class DataTable
     function compile()
     {
         $html = '';
-        $border = $this->bordered ? 'cellpadding="8" style="border-collapse: collapse;"' : 'cellpadding="0"';
+        $border = $this->bordered ? 'cellpadding="8" style="border-collapse: collapse;font-size:' . $this->fontSize . 'pt"' : 'cellpadding="0"';
         $html .= sprintf('<table %s cellspacing="0">', $border);
         if (count($this->head) > 0) {
             $html .= '<thead>';
@@ -73,4 +75,11 @@ class DataTable
         return $html;
     }
 
+    /**
+     * @param mixed $fontSize
+     */
+    public function setFontSize($fontSize)
+    {
+        $this->fontSize = $fontSize;
+    }
 }
