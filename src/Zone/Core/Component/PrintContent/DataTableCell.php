@@ -46,7 +46,7 @@ class DataTableCell
     {
         $width = $this->width ? 'width="' . $this->width . '"' : '';
         $height = $this->height ? 'width="' . $this->height . '"' : '';
-        $style = '';
+        $style = ''; //$this->getUseBorders() ? 'style="border:1px solid"' : '';
         if($this->getIsTh()) {
             return sprintf('<th %s %s valign="%s" align="%s" %s>%s</th>', $width, $height, $this->position, $this->align, $style, $this->text);
         }else{

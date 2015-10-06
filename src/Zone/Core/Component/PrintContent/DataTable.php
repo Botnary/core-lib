@@ -37,8 +37,11 @@ class DataTable
 
     function compile()
     {
-        $border = $this->bordered ? 'border="1" style="1px solid #ddd"' : '';
-        $html = sprintf('<table %s cellpadding="2" cellspacing="0">', $border);
+        $border = $this->bordered ? 'border="1" style="border-collapse: collapse;"' : '';
+        $html = '<style>td {border-left: 0.1mm solid #000000; border-right: 0.1mm solid #000000;}
+                        thead td { background-color: #EEEEEE; text-align: center; border: 0.1mm solid #000000; }
+                </style>';
+        $html .= sprintf('<table %s cellpadding="8" cellspacing="0">', $border);
         if (count($this->head) > 0) {
             $html .= '<thead>';
             foreach ($this->head as $row) {
