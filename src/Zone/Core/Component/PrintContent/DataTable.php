@@ -38,14 +38,8 @@ class DataTable
     function compile()
     {
         $html = '';
-        $border = $this->bordered ? 'style="border-collapse: collapse;"' : '';
-        if($this->bordered) {
-            $html = '<style>
-                        /*td {border: 0.1mm solid #000000; }*/
-                        /*th {border: 0.1mm solid #000000; }*/
-                    </style>';
-        }
-        $html .= sprintf('<table %s cellpadding="8" cellspacing="0">', $border);
+        $border = $this->bordered ? 'cellpadding="8" style="border-collapse: collapse;"' : 'cellpadding="0"';
+        $html .= sprintf('<table %s cellspacing="0">', $border);
         if (count($this->head) > 0) {
             $html .= '<thead>';
             foreach ($this->head as $row) {
