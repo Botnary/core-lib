@@ -41,8 +41,8 @@ class DataTable
         $border = $this->bordered ? 'style="border-collapse: collapse;"' : '';
         if($this->bordered) {
             $html = '<style>
-                        td {border: 0.1mm solid #000000; }
-                        th {border: 0.1mm solid #000000; }
+                        /*td {border: 0.1mm solid #000000; }*/
+                        /*th {border: 0.1mm solid #000000; }*/
                     </style>';
         }
         $html .= sprintf('<table %s cellpadding="8" cellspacing="0">', $border);
