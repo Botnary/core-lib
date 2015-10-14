@@ -215,10 +215,12 @@ class DataTableCell
 
     /**
      * @param mixed $rowSpan
+     * @return DataTableCell
      */
     public function setRowSpan($rowSpan)
     {
         $this->rowSpan = $rowSpan;
+        return $this;
     }
 
 }
