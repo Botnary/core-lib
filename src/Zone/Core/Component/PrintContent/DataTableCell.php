@@ -20,6 +20,7 @@ class DataTableCell
     private $useBorders;
     private $isTh;
     private $colSpan;
+    private $rowSpan;
 
     /**
      * DataTableCell constructor.
@@ -51,11 +52,12 @@ class DataTableCell
         $style .= $this->width ? 'width:' . $this->width . ';' : '';
         $style .= $this->height ? 'height:' . $this->height . ';' : '';
         $colSpan = $this->colSpan > 0 ? sprintf('colspan="%d"', $this->colSpan) : '';
+        $rowSpan = $this->rowSpan > 0 ? sprintf('rowspan="%d"', $this->rowSpan) : '';
         $style .= '"';
         if ($this->getIsTh()) {
-            return sprintf('<th %s %s valign="%s" align="%s" %s>%s</th>', $colSpan, $height, $this->position, $this->align, $style, $this->text);
+            return sprintf('<th %s %s %s valign="%s" align="%s" %s>%s</th>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
         } else {
-            return sprintf('<td %s %s valign="%s" align="%s" %s>%s</td>', $colSpan, $height, $this->position, $this->align, $style, $this->text);
+            return sprintf('<td %s %s %s valign="%s" align="%s" %s>%s</td>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
         }
     }
 
@@ -201,6 +203,22 @@ class DataTableCell
     {
         $this->colSpan = $colSpan;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRowSpan()
+    {
+        return $this->rowSpan;
+    }
+
+    /**
+     * @param mixed $rowSpan
+     */
+    public function setRowSpan($rowSpan)
+    {
+        $this->rowSpan = $rowSpan;
     }
 
 }
