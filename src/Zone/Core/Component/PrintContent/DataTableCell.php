@@ -21,6 +21,7 @@ class DataTableCell
     private $isTh;
     private $colSpan;
     private $rowSpan;
+    private $isHidden;
 
     /**
      * DataTableCell constructor.
@@ -51,6 +52,7 @@ class DataTableCell
         $style .= $this->getUseBorders() ? 'border: 0.1mm solid #000000;' : '';
         $style .= $this->width ? 'width:' . $this->width . ';' : '';
         $style .= $this->height ? 'height:' . $this->height . ';' : '';
+        $style .= $this->isHidden ? 'display:none;' : '';
         $colSpan = $this->colSpan > 0 ? sprintf('colspan="%d"', $this->colSpan) : '';
         $rowSpan = $this->rowSpan > 0 ? sprintf('rowspan="%d"', $this->rowSpan) : '';
         $style .= '"';
@@ -220,6 +222,24 @@ class DataTableCell
     public function setRowSpan($rowSpan)
     {
         $this->rowSpan = $rowSpan;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsHidden()
+    {
+        return $this->isHidden;
+    }
+
+    /**
+     * @param mixed $isHidden
+     * @return DataTableCell
+     */
+    public function setIsHidden($isHidden)
+    {
+        $this->isHidden = $isHidden;
         return $this;
     }
 
