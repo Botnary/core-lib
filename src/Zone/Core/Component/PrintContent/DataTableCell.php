@@ -52,15 +52,18 @@ class DataTableCell
         $style .= $this->getUseBorders() ? 'border: 0.1mm solid #000000;' : '';
         $style .= $this->width ? 'width:' . $this->width . ';' : '';
         $style .= $this->height ? 'height:' . $this->height . ';' : '';
-        $style .= $this->isHidden ? 'display:none;' : '';
         $colSpan = $this->colSpan > 0 ? sprintf('colspan="%d"', $this->colSpan) : '';
         $rowSpan = $this->rowSpan > 0 ? sprintf('rowspan="%d"', $this->rowSpan) : '';
         $style .= '"';
         if ($this->getIsTh()) {
-            return sprintf('<th %s %s %s valign="%s" align="%s" %s>%s</th>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
+            $cell = sprintf('<th %s %s %s valign="%s" align="%s" %s>%s</th>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
         } else {
-            return sprintf('<td %s %s %s valign="%s" align="%s" %s>%s</td>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
+            $cell = sprintf('<td %s %s %s valign="%s" align="%s" %s>%s</td>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
         }
+        if ($this->isHidden) {
+            $cell = '';
+        }
+        return $cell;
     }
 
     /**
