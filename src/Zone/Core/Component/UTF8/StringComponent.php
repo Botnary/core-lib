@@ -312,4 +312,9 @@ class StringComponent extends Singleton
 
         return $title;
     }
+
+    function slugify($text)
+    {
+        return $this->sanitizeWithDashes($this->removeAccents($text));
+    }
 }
