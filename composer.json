@@ -16,7 +16,6 @@
     "symfony/intl": "2.6.*@dev",
     "smarty/smarty": "3.1.19",
     "guzzle/guzzle": "*",
-    "hieu-le/wordpress-xmlrpc-client": "dev-master",
     "monolog/monolog": "*",
     "symfony/event-dispatcher": "2.7.*@dev",
     "respect/validation": "0.8.*@dev",
