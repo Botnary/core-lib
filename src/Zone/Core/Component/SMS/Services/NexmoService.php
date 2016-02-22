@@ -46,6 +46,8 @@ class NexmoService implements ISmsService
         curl_setopt($to_nexmo, CURLOPT_POST, true);
         curl_setopt($to_nexmo, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($to_nexmo, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($to_nexmo, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($to_nexmo, CURLOPT_SSL_VERIFYPEER, 0);
         $from_nexmo = curl_exec($to_nexmo);
         curl_close($to_nexmo);
         return str_replace('-', '_', $from_nexmo);
