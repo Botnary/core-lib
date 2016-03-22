@@ -16,6 +16,7 @@ class DataTable
     private $head;
     private $bordered;
     private $headBgColor;
+    private $headColor;
     private $fontSize;
     private $width;
 
@@ -25,6 +26,7 @@ class DataTable
         $this->head = array();
         $this->bordered = $bordered;
         $this->headBgColor = $headBgColor;
+        $this->headColor = '#000000';
         $this->fontSize = 9;
         $this->width = false;
     }
@@ -48,7 +50,7 @@ class DataTable
         if (count($this->head) > 0) {
             $html .= '<thead>';
             foreach ($this->head as $row) {
-                $html .= sprintf('<tr style="background: %s">', $this->headBgColor);
+                $html .= sprintf('<tr style="background: %s;color: %s">', $this->getHeadBgColor(), $this->getHeadColor());
                 /** @var DataTableCell $cell */
                 foreach ($row as $cell) {
                     if ($this->bordered) {
@@ -92,6 +94,38 @@ class DataTable
     public function setWidth($width)
     {
         $this->width = $width;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeadBgColor()
+    {
+        return $this->headBgColor;
+    }
+
+    /**
+     * @param string $headBgColor
+     */
+    public function setHeadBgColor($headBgColor)
+    {
+        $this->headBgColor = $headBgColor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeadColor()
+    {
+        return $this->headColor;
+    }
+
+    /**
+     * @param string $headColor
+     */
+    public function setHeadColor($headColor)
+    {
+        $this->headColor = $headColor;
     }
 
 }
