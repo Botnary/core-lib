@@ -22,6 +22,7 @@ class DataTableCell
     private $colSpan;
     private $rowSpan;
     private $isHidden;
+    private $textColor;
 
     /**
      * DataTableCell constructor.
@@ -52,6 +53,7 @@ class DataTableCell
         $style .= $this->getUseBorders() ? 'border: 0.1mm solid #000000;' : '';
         $style .= $this->width ? 'width:' . $this->width . ';' : '';
         $style .= $this->height ? 'height:' . $this->height . ';' : '';
+        $style .= 'color:' . $this->getTextColor() . ';';
         $colSpan = $this->colSpan > 0 ? sprintf('colspan="%d"', $this->colSpan) : '';
         $rowSpan = $this->rowSpan > 0 ? sprintf('rowspan="%d"', $this->rowSpan) : '';
         $style .= '"';
@@ -244,6 +246,22 @@ class DataTableCell
     {
         $this->isHidden = $isHidden;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTextColor()
+    {
+        return $this->textColor ? $this->textColor : '#000000';
+    }
+
+    /**
+     * @param mixed $textColor
+     */
+    public function setTextColor($textColor)
+    {
+        $this->textColor = $textColor;
     }
 
 }

@@ -50,12 +50,13 @@ class DataTable
         if (count($this->head) > 0) {
             $html .= '<thead>';
             foreach ($this->head as $row) {
-                $html .= sprintf('<tr style="background: %s;color: %s">', $this->getHeadBgColor(), $this->getHeadColor());
+                $html .= sprintf('<tr style="background: %s;">', $this->getHeadBgColor());
                 /** @var DataTableCell $cell */
                 foreach ($row as $cell) {
                     if ($this->bordered) {
                         $cell->setUseBorders(true);
                         $cell->setIsTh(true);
+                        $cell->setTextColor($this->getHeadColor());
                     }
                     $html .= $cell->compile();
                 }
