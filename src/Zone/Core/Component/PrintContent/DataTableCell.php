@@ -258,10 +258,12 @@ class DataTableCell
 
     /**
      * @param mixed $textColor
+     * @return DataTableCell
      */
     public function setTextColor($textColor)
     {
         $this->textColor = $textColor;
+        return $this;
     }
 
 }
