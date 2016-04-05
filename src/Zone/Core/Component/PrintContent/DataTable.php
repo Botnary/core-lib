@@ -19,6 +19,7 @@ class DataTable
     private $headColor;
     private $fontSize;
     private $width;
+    private $cellPadding = 0;
 
     public function __construct($bordered = false, $headBgColor = 'rgb(206, 206, 206)')
     {
@@ -45,7 +46,10 @@ class DataTable
     {
         $html = '';
         $width = $this->width ? sprintf('width:%s;', $this->width) : '';
-        $border = $this->bordered ? 'cellpadding="8" style="' . $width . 'border-collapse: collapse;font-size:' . $this->fontSize . 'pt"' : 'cellpadding="0" style="' . $width . 'font-size:' . $this->fontSize . 'pt;"';
+        if($this->bordered && !$this->cellPadding){
+            $this->cellPadding = 8;
+        }
+        $border = $this->bordered ? 'cellpadding="'.$this->cellPadding.'" style="' . $width . 'border-collapse: collapse;font-size:' . $this->fontSize . 'pt"' : 'cellpadding="'.$this->cellPadding.'" style="' . $width . 'font-size:' . $this->fontSize . 'pt;"';
         $html .= sprintf('<table %s cellspacing="0">', $border);
         if (count($this->head) > 0) {
             $html .= '<thead>';
