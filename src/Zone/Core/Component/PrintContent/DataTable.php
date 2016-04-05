@@ -133,4 +133,20 @@ class DataTable
         $this->headColor = $headColor;
     }
 
+    /**
+     * @return int
+     */
+    public function getCellPadding()
+    {
+        return $this->cellPadding;
+    }
+
+    /**
+     * @param int $cellPadding
+     */
+    public function setCellPadding($cellPadding)
+    {
+        $this->cellPadding = $cellPadding;
+    }
+
 }
