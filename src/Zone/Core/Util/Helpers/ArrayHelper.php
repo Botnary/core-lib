@@ -14,20 +14,21 @@ class ArrayHelper extends AbstractHelper
     function collectionToArray($collection)
     {
         $items = array();
-        foreach ($collection as $item) {
+        foreach ((array)$collection as $item) {
             $items[] = $item->toArray();
         }
         return $items;
     }
 
-    function arraySearch($array = array(), $callback, $recursive = false){
-        foreach($array as $key => $value){
-            if(call_user_func_array($callback, array($value))){
+    function arraySearch($array = array(), $callback, $recursive = false)
+    {
+        foreach ((array)$array as $key => $value) {
+            if (call_user_func_array($callback, array($value))) {
                 return array($key => $value);
-            }else{
-                if(is_array($value) && $recursive){
+            } else {
+                if (is_array($value) && $recursive) {
                     $result = $this->arraySearch($value, $callback);
-                    if($result){
+                    if ($result) {
                         return $result;
                     }
                 }
