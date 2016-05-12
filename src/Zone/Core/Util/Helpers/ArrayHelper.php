@@ -14,9 +14,9 @@ class ArrayHelper extends AbstractHelper
     function collectionToArray($collection)
     {
         $items = array();
-        foreach ((array)$collection as $item) {
-            if (method_exists($item, 'toArray'))
-                $items[] = $item->toArray();
+        $collection = method_exists($collection, 'toArray') ? $collection->toArray() : array();
+        foreach ($collection as $item) {
+            $items[] = $item->toArray();
         }
         return $items;
     }
