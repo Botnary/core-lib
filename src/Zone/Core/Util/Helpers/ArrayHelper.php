@@ -15,7 +15,8 @@ class ArrayHelper extends AbstractHelper
     {
         $items = array();
         foreach ((array)$collection as $item) {
-            $items[] = $item->toArray();
+            if (method_exists($item, 'toArray'))
+                $items[] = $item->toArray();
         }
         return $items;
     }
