@@ -22,14 +22,6 @@ class StringComponent extends Singleton
         $this->utf = new UTF8Component();
     }
 
-    /**
-     * @return StringComponent
-     */
-    public static function getInstance()
-    {
-        return parent::getInstance();
-    }
-
     function removeAccents($string)
     {
         if (!preg_match('/[\x80-\xff]/', $string))
