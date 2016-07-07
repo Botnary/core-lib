@@ -9,7 +9,7 @@
 namespace Zone\Core\Util;
 
 
-class Singleton
+abstract class Singleton
 {
     /**
      * Returns the *Singleton* instance of this class.
@@ -18,7 +18,7 @@ class Singleton
      *
      * @return Singleton The *Singleton* instance.
      */
-    public static function getInstance()
+    final public static function getInstance()
     {
         static $instance = null;
         if (null === $instance) {
@@ -42,7 +42,7 @@ class Singleton
      *
      * @return void
      */
-    private function __clone()
+    final private function __clone()
     {
     }
 
