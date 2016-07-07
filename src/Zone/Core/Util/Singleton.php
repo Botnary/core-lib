@@ -20,12 +20,16 @@ abstract class Singleton
      */
     final public static function getInstance()
     {
-        static $instance = null;
-        if (null === $instance) {
-            $instance = new static();
+        static $instances = array();
+
+        $calledClass = get_called_class();
+
+        if (!isset($instances[$calledClass]))
+        {
+            $instances[$calledClass] = new $calledClass();
         }
 
-        return $instance;
+        return $instances[$calledClass];
     }
 
     /**
