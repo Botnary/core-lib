@@ -17,7 +17,7 @@ use Zone\Core\Component\Doctrine\Extensions\TablePrefix;
 class DoctrineManager extends ContainerAware{
     private $manager;
     private $isDevMode;
-
+    private $cache;
     /**
      * @param \Zone\Core\Component\Database\Connector $connector
      */
@@ -45,6 +45,10 @@ class DoctrineManager extends ContainerAware{
         $config->addCustomStringFunction('YEAR', '\Zone\Core\Component\Doctrine\Extensions\Mysql\Year');
         $config->setProxyDir($connector->getProxyDir());
         $config->setAutoGenerateProxyClasses(true);
+        if($this->cache){
+            $config->setMetadataCacheImpl($this->cache);
+            $config->setQueryCacheImpl($this->cache);
+        }
         $this->manager = EntityManager::create($dbParams, $config, $evm);
     }
 
@@ -62,5 +66,13 @@ class DoctrineManager extends ContainerAware{
     public function getManager()
     {
         return $this->manager;
+    }
+
+    /**
+     * @param mixed $cache
+     */
+    public function setCache($cache)
+    {
+        $this->cache = $cache;
     }
 }
