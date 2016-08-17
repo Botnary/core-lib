@@ -20,6 +20,7 @@ class DataTable
     private $fontSize;
     private $width;
     private $cellPadding = 0;
+    private $pageBreak;
 
     public function __construct($bordered = false, $headBgColor = 'rgb(206, 206, 206)')
     {
@@ -46,10 +47,10 @@ class DataTable
     {
         $html = '';
         $width = $this->width ? sprintf('width:%s;', $this->width) : '';
-        if($this->bordered && !$this->cellPadding){
+        if ($this->bordered && !$this->cellPadding) {
             $this->cellPadding = 8;
         }
-        $border = $this->bordered ? 'cellpadding="'.$this->cellPadding.'" style="' . $width . 'border-collapse: collapse;font-size:' . $this->fontSize . 'pt"' : 'cellpadding="'.$this->cellPadding.'" style="' . $width . 'font-size:' . $this->fontSize . 'pt;"';
+        $border = $this->bordered ? 'cellpadding="' . $this->cellPadding . '" style="' . $width . 'border-collapse: collapse;font-size:' . $this->fontSize . 'pt;' . $this->pageBreak . '"' : 'cellpadding="' . $this->cellPadding . '" style="' . $width . 'font-size:' . $this->fontSize . 'pt;' . $this->pageBreak . '"';
         $html .= sprintf('<table %s cellspacing="0">', $border);
         if (count($this->head) > 0) {
             $html .= '<thead>';
@@ -147,6 +148,24 @@ class DataTable
     public function setCellPadding($cellPadding)
     {
         $this->cellPadding = $cellPadding;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPageBreak()
+    {
+        return $this->pageBreak;
+    }
+
+    /**
+     * @param mixed $pageBreak
+     * @return DataTable
+     */
+    public function setPageBreak($pageBreak)
+    {
+        $this->pageBreak = $pageBreak;
+        return $this;
     }
 
 }
