@@ -18,24 +18,32 @@ class DoctrineManager extends ContainerAware{
     private $manager;
     private $isDevMode;
     private $cache;
+    private $connector;
+
     /**
      * @param \Zone\Core\Component\Database\Connector $connector
+     * @param bool $devMode
+     * @throws \Doctrine\ORM\ORMException
      */
-    function __construct($connector)
+    function __construct($connector, $devMode = true)
     {
         $this->isDevMode = true;
+        $this->connector = $connector;
+    }
+
+    function initialize(){
         $dbParams = array(
-            'driver' => $connector->getDriver(),
-            'user' => $connector->getDbUser(),
-            'password' => $connector->getDbPassword(),
-            'dbname' => $connector->getDbName(),
-            'host'=>$connector->getDbHost(),
+            'driver' => $this->connector->getDriver(),
+            'user' => $this->connector->getDbUser(),
+            'password' => $this->connector->getDbPassword(),
+            'dbname' => $this->connector->getDbName(),
+            'host'=>$this->connector->getDbHost(),
         );
         $evm = new \Doctrine\Common\EventManager;
-        $tablePrefix = new TablePrefix($connector->getTablePrefix());
+        $tablePrefix = new TablePrefix($this->connector->getTablePrefix());
         $evm->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
 
-        $config = Setup::createAnnotationMetadataConfiguration($connector->getEntityLocations(), $this->isDevMode);
+        $config = Setup::createAnnotationMetadataConfiguration($this->connector->getEntityLocations(), $this->isDevMode());
         //$config->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
         //$config->setSQLLogger(new \Zone\Core\Component\Doctrine\Logger\ApacheSQLLogger());
         $config->addCustomStringFunction('CONCAT_WS', '\Zone\Core\Component\Doctrine\Extensions\Mysql\ConcatWs');
@@ -43,7 +51,7 @@ class DoctrineManager extends ContainerAware{
         $config->addCustomStringFunction('DAY', '\Zone\Core\Component\Doctrine\Extensions\Mysql\Day');
         $config->addCustomStringFunction('MONTH', '\Zone\Core\Component\Doctrine\Extensions\Mysql\Month');
         $config->addCustomStringFunction('YEAR', '\Zone\Core\Component\Doctrine\Extensions\Mysql\Year');
-        $config->setProxyDir($connector->getProxyDir());
+        $config->setProxyDir($this->connector->getProxyDir());
         $config->setAutoGenerateProxyClasses(true);
         if($this->cache){
             $config->setMetadataCacheImpl($this->cache);
@@ -75,4 +83,29 @@ class DoctrineManager extends ContainerAware{
     {
         $this->cache = $cache;
     }
+
+    /**
+     * @param boolean $isDevMode
+     */
+    public function setIsDevMode($isDevMode)
+    {
+        $this->isDevMode = $isDevMode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConnector()
+    {
+        return $this->connector;
+    }
+
+    /**
+     * @param mixed $connector
+     */
+    public function setConnector($connector)
+    {
+        $this->connector = $connector;
+    }
+
 }
