@@ -11,6 +11,7 @@ namespace Zone\Core\Component\PrintContent;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
+use Zone\Core\Component\UTF8\StringComponent;
 
 class Printer extends \mPDF
 {
@@ -146,9 +147,7 @@ class Printer extends \mPDF
 
     static function slug($input)
     {
-        $string = html_entity_decode($input, ENT_COMPAT, "UTF-8");
-        $string = iconv("UTF-8", "ASCII//TRANSLIT", $string);
-        return strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $string));
+        return StringComponent::getInstance()->slugify($input);
     }
 
     function addTable(DataTable $dataTable)
