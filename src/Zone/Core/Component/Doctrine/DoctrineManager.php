@@ -18,12 +18,14 @@ class DoctrineManager extends ContainerAware{
     private $manager;
     private $isDevMode;
     private $cache;
+
     /**
      * @param \Zone\Core\Component\Database\Connector $connector
+     * @param bool $isDevMode
      */
-    function __construct($connector)
+    function __construct($connector, $isDevMode = false)
     {
-        $this->isDevMode = true;
+        $this->isDevMode = $isDevMode;
         $dbParams = array(
             'driver' => $connector->getDriver(),
             'user' => $connector->getDbUser(),
@@ -44,7 +46,7 @@ class DoctrineManager extends ContainerAware{
         $config->addCustomStringFunction('MONTH', '\Zone\Core\Component\Doctrine\Extensions\Mysql\Month');
         $config->addCustomStringFunction('YEAR', '\Zone\Core\Component\Doctrine\Extensions\Mysql\Year');
         $config->setProxyDir($connector->getProxyDir());
-        $config->setAutoGenerateProxyClasses(true);
+        $config->setAutoGenerateProxyClasses(false);
         if($this->cache){
             $config->setMetadataCacheImpl($this->cache);
             $config->setQueryCacheImpl($this->cache);
@@ -75,4 +77,6 @@ class DoctrineManager extends ContainerAware{
     {
         $this->cache = $cache;
     }
+
+
 }
