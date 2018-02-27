@@ -22,7 +22,7 @@
     "intervention/image": "dev-master",
     "phpunit/phpunit": "4.4.*",
     "symfony/finder": "3.0.*@dev",
-    "swiftmailer/swiftmailer": "6.*",
+    "swiftmailer/swiftmailer": "*",
     "che/doctrine-decimal": "*",
     "mpdf/mpdf": "*"
   },
