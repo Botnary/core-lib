@@ -119,6 +119,7 @@ class Printer extends \mPDF
     function useReturn()
     {
         $this->return = true;
+        unset($this->javascript);
     }
 
     function isAutoPrint()
