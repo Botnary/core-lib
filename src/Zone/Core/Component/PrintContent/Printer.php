@@ -16,7 +16,7 @@ use Zone\Core\Component\UTF8\StringComponent;
 class Printer extends \Mpdf\Mpdf
 {
     private $javascript = true;
-    private $n_js;
+    public $n_js;
     private $useAutoPrint = false;
     private $fileName = 'Document.pdf';
     private $docTitle = '';
