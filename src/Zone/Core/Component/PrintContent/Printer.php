@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 use Zone\Core\Component\UTF8\StringComponent;
 
-class Printer extends \mPDF
+class Printer extends \Mpdf\Mpdf
 {
     private $javascript = true;
     private $n_js;
