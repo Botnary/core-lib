@@ -44,7 +44,7 @@ class Printer extends \Mpdf\Mpdf
             'format' => $format,
             'mode' => $mode,
             'orientation' => $orientation,
-
+            'shrink_tables_to_fit' => 0,
         ]);
         //parent::__construct($mode, $format, $default_font_size, $default_font, $mgl, $mgr, $mgt, $mgb, $mgh, $mgf, $orientation);
         $this->eventDispatcher = new EventDispatcher();
