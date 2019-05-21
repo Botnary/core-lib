@@ -41,46 +41,21 @@ class Printer extends \Mpdf\Mpdf
     public function __construct($mode = '', $format = 'A4', $default_font_size = 0, $default_font = '', $mgl = 15, $mgr = 15, $mgt = 16, $mgb = 16, $mgh = 9, $mgf = 9, $orientation = 'P')
     {
         parent::__construct([
+            'default_font_size' => 8,
+            'default_font' => 'dejavusans',
             'format' => $format,
-            'mode' => $mode,
+            'mode' => 'utf-8',
             'orientation' => $orientation,
             'shrink_tables_to_fit' => 0,
+            'setAutoTopMargin' => 'stretch',
+            'setAutoBottomMargin' => 'stretch',
+            'debug' => false,
+            'margin_top' => 0,
+            'margin_right' => 5,
+            'margin_left' => 5,
         ]);
         //parent::__construct($mode, $format, $default_font_size, $default_font, $mgl, $mgr, $mgt, $mgb, $mgh, $mgf, $orientation);
         $this->eventDispatcher = new EventDispatcher();
-    }
-
-    function _putjavascript()
-    {
-        $this->_newobj();
-        $this->n_js = $this->n;
-        $this->_out('<<');
-        $this->_out('/Names [(EmbeddedJS) ' . ($this->n + 1) . ' 0 R]');
-        $this->_out('>>');
-        $this->_out('endobj');
-        $this->_newobj();
-        $this->_out('<<');
-        $this->_out('/S /JavaScript');
-        $this->_out('/JS ' . $this->_textstring($this->javascript));
-        $this->_out('>>');
-        $this->_out('endobj');
-    }
-
-    function _putresources()
-    {
-        $this->_putextgstates();
-        parent::_putresources();
-        if (!empty($this->javascript)) {
-            $this->_putjavascript();
-        }
-    }
-
-    function _putcatalog()
-    {
-        parent::_putcatalog();
-        if (!empty($this->javascript)) {
-            $this->_out('/Names <</JavaScript ' . ($this->n_js) . ' 0 R>>');
-        }
     }
 
     function getAvailableWidth()
@@ -119,7 +94,7 @@ class Printer extends \Mpdf\Mpdf
 
     function useAutoPrint()
     {
-        $this->javascript = "print('true');";
+        $this->SetJS("print('true');");
         $this->useAutoPrint = true;
     }
 
