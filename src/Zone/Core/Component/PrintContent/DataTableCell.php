@@ -23,7 +23,8 @@ class DataTableCell
     private $rowSpan;
     private $isHidden;
     private $textColor;
-
+    private $extraStyle = "";
+    
     /**
      * DataTableCell constructor.
      */
@@ -58,9 +59,9 @@ class DataTableCell
         $rowSpan = $this->rowSpan > 0 ? sprintf('rowspan="%d"', $this->rowSpan) : '';
         $style .= '"';
         if ($this->getIsTh()) {
-            $cell = sprintf('<th %s %s %s valign="%s" align="%s" %s>%s</th>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
+            $cell = sprintf('<th style="%s" %s %s %s valign="%s" align="%s" %s>%s</th>', $this->extraStyle, $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
         } else {
-            $cell = sprintf('<td %s %s %s valign="%s" align="%s" %s>%s</td>', $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
+            $cell = sprintf('<td style="%s" %s %s %s valign="%s" align="%s" %s>%s</td>', $this->extraStyle, $rowSpan, $colSpan, $height, $this->position, $this->align, $style, $this->text);
         }
         if ($this->isHidden) {
             $cell = '';
@@ -264,6 +265,23 @@ class DataTableCell
     {
         $this->textColor = $textColor;
         return $this;
+    }
+    
+    /**
+     * @param string $extraStyle
+     */
+    public function setExtraStyle(string $extraStyle)
+    {
+        $this->extraStyle = $extraStyle;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtraStyle(): string
+    {
+        return $this->extraStyle;
     }
 
 }
