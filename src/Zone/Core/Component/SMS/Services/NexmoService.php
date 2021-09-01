@@ -57,8 +57,8 @@ class NexmoService implements ISmsService
     {
         $from = $message->fromPhone;
         if (!is_numeric($from))
-            $from = utf8_encode($from); //Must be UTF-8 Encoded if not a continuous number
-        $text = utf8_encode($message->message); //Must be UTF-8 Encoded
+            $from = $from; //Must be UTF-8 Encoded if not a continuous number
+        $text = $message->message; //Must be UTF-8 Encoded
         $from = urlencode($from); // URL Encode
         $text = urlencode($text); // URL Encode
         $post = 'username=' . $this->user . '&password=' . $this->pass . '&from=' . $from . '&to=' . $message->toPhone . '&text=' . $text;
