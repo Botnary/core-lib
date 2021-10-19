@@ -12,6 +12,8 @@ namespace Zone\Core\Controller;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Zone\Core\Component\DependencyInjection\ContainerAware;
 use Zone\Core\Component\Doctrine\DoctrineManager;
@@ -28,7 +30,7 @@ class Controller extends ContainerAware
         $this->setContainer($container);
         $this->_logger = new Logger('Gestion Minute');
         $this->_logger->pushHandler(new ErrorLogHandler());
-        $this->_logger->pushHandler(new StreamHandler('./app.log', Logger::WARNING));
+        $this->_logger->pushHandler(new StreamHandler('app.log', Logger::WARNING));
         $this->container->set('_logger', $this->_logger);
     }
 
@@ -46,7 +48,7 @@ class Controller extends ContainerAware
     }
 
     /**
-     * @return \Slim\Http\Request
+     * @return ServerRequestInterface
      */
     public function getRequest()
     {
@@ -54,7 +56,7 @@ class Controller extends ContainerAware
     }
 
     /**
-     * @return \Slim\Http\Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {

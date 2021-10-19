@@ -10,7 +10,7 @@ namespace Zone\Core\Application;
 
 interface IApplication {
     /**
-     * @return \Slim\Slim
+     * @return \Slim\App
      */
     function getSlim();
 
