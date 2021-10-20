@@ -63,11 +63,11 @@ class NexmoService implements ISmsService
         $text = urlencode($text); // URL Encode
         $post = 'username=' . $this->user . '&password=' . $this->pass . '&from=' . $from . '&to=' . $message->toPhone . '&text=' . $text;
         $request = json_decode($this->sendRequest($post));
-        $this->getLogger()->addDebug('SMS: send status', array($request));
+        $this->getLogger()->debug('SMS: send status', array($request));
         $sent = true;
         foreach ($request->messages as $message) {
             if ($message->status == 1) {
-                $this->getLogger()->addDebug('SMS: You have exceeded the submission capacity allowed on this account, please back-off and retry', array($request));
+                $this->getLogger()->debug('SMS: You have exceeded the submission capacity allowed on this account, please back-off and retry', array($request));
                 $sent = false;
             } elseif ($message->status > 1) {
                 $sent = false;
@@ -86,7 +86,7 @@ class NexmoService implements ISmsService
         $sent = true;
         foreach ($request->messages as $message) {
             if ($message->status == 1) {
-                $this->getLogger()->addDebug('SMS: You have exceeded the submission capacity allowed on this account, please back-off and retry', array($request));
+                $this->getLogger()->debug('SMS: You have exceeded the submission capacity allowed on this account, please back-off and retry', array($request));
                 $sent = false;
             } elseif ($message->status > 1) {
                 $sent = false;
@@ -105,7 +105,7 @@ class NexmoService implements ISmsService
         $sent = true;
         foreach ($request->messages as $message) {
             if ($message->status == 1) {
-                $this->getLogger()->addDebug('SMS: You have exceeded the submission capacity allowed on this account, please back-off and retry', array($request));
+                $this->getLogger()->debug('SMS: You have exceeded the submission capacity allowed on this account, please back-off and retry', array($request));
                 $sent = false;
             } elseif ($message->status > 1) {
                 $sent = false;

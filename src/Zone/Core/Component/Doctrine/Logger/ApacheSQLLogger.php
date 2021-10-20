@@ -35,7 +35,7 @@ class ApacheSQLLogger implements  SQLLogger {
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
-        $this->getLogger()->addDebug($sql,array($params, $types));
+        $this->getLogger()->debug($sql,array($params, $types));
     }
 
     /**
