@@ -19,7 +19,7 @@
     "monolog/monolog": "*",
     "symfony/event-dispatcher": "*",
     "respect/validation": "*",
-    "intervention/image": "dev-master",
+    "intervention/image": "*",
     "symfony/finder": "*",
     "swiftmailer/swiftmailer": "*",
     "che/doctrine-decimal": "*",
