@@ -20,7 +20,6 @@
     "symfony/event-dispatcher": "*",
     "respect/validation": "*",
     "intervention/image": "dev-master",
-    "phpunit/phpunit": "*",
     "symfony/finder": "*",
     "swiftmailer/swiftmailer": "*",
     "che/doctrine-decimal": "*",

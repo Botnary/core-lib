@@ -52,7 +52,10 @@ class Controller extends ContainerAware
      */
     public function getRequest()
     {
-        return $this->application()->getSlim()->request();
+        if (!$this->container->has('slim.request')) {
+            return $this->application()->getSlim()->request();
+        }
+        return $this->container->get('slim.request');
     }
 
     /**
@@ -60,7 +63,11 @@ class Controller extends ContainerAware
      */
     public function getResponse()
     {
-        return $this->application()->getSlim()->response();
+        if (!$this->container->has('slim.response')) {
+            return $this->application()->getSlim()->response();
+        }
+        return $this->container->get('slim.response');
+
     }
 
     /**
