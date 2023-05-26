@@ -15,7 +15,6 @@
     "symfony/yaml": "*",
     "symfony/intl": "*",
     "smarty/smarty": "*",
-    "guzzle/guzzle": "*",
     "monolog/monolog": "*",
     "symfony/event-dispatcher": "*",
     "respect/validation": "*",
